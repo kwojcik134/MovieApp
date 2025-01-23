@@ -7,7 +7,39 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="AddUser.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MoviesList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MovieWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="AddUser.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MoviesList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MovieWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

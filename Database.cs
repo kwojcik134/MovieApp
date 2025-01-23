@@ -15,7 +15,7 @@ namespace MovieAppWPF
         public Database() { }
 
         // Creates tables if they don't exist
-        public static void DatabaseInit()
+        public void DatabaseStart() //App.xaml.cs
         {
             using (var connection = new SqliteConnection("Data Source=database.db"))
             {
@@ -81,7 +81,7 @@ namespace MovieAppWPF
         }
 
         //Adding users
-        public static void AddUser(string username)
+        public void AddUser(string username) // AddUser.xaml.cs
         {
 
             using var connection = new SqliteConnection("Data Source=Movies.db");
@@ -95,7 +95,7 @@ namespace MovieAppWPF
             command.ExecuteNonQuery();
         }
         //Deleting users
-        public static void DeleteUser(string username)
+        public void DeleteUser(string? username) //UserList.xalm.cs
         {
 
             using var connection = new SqliteConnection("Data Source=Movies.db");
@@ -152,9 +152,9 @@ namespace MovieAppWPF
         }
 
         //Displaying users
-        public List<string> DisplayUsers()
+        public List<string> DisplayUsers() // UserList.xaml.cs
         {
-            var users = new List<string>();
+            var Users = new List<string>();
             using (var connection = new SqliteConnection("Data Source=Movies.db"))
             {
                 connection.Open();
@@ -166,11 +166,11 @@ namespace MovieAppWPF
                 {
                     while (reader.Read())
                     {
-                        users.Add(reader.GetString(0));
+                        Users.Add(reader.GetString(0));
                     }
                 }
             }
-            return users;
+            return Users;
         }
 
         //Displaying all of user's reviews
@@ -214,7 +214,7 @@ namespace MovieAppWPF
             return userReviews;
         }
 
-        //Displaying all of movie's reviews - todo
+        //Displaying all of movie's reviews
         public List<string> Reviews(string title)
         {
             var reviews = new List<string>();

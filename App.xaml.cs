@@ -9,6 +9,12 @@ namespace MovieAppWPF
     /// </summary>
     public partial class App : Application
     {
+        // Loading the database (creating tables if not there yet)
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            Database database = new Database();
+            database.DatabaseStart();
+        }
     }
 
 }

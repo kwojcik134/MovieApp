@@ -1,0 +1,15 @@
+﻿<Window x:Class="MovieAppWPF.UserList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MovieAppWPF"
+        mc:Ignorable="d"
+        Title="UserList" Height="600" Width="800">
+    <Grid Height="598">
+        <ListBox x:Name="UserListBox"  Margin="30,30,290,30"/>
+        <Button Content="Choose User" HorizontalAlignment="Left" Height="50" Margin="540,60,0,0" VerticalAlignment="Top" Width="150" Click="ChooseUser"/>
+        <Button Content="Delete User" HorizontalAlignment="Left" Height="50" Margin="540,140,0,0" VerticalAlignment="Top" Width="150" Click="DeleteUser"/>
+        <Button Content="Add New User" HorizontalAlignment="Left" Height="50" Margin="540,0,0,60" VerticalAlignment="Bottom" Width="150" Click="AddNewUser"/>
+    </Grid>
+</Window>
