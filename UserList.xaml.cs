@@ -20,10 +20,11 @@ namespace MovieAppWPF
     public partial class UserList : Window
     {
         Database database = new Database();
+        List<string> Users = new List<string>();
         public UserList()
         {
             InitializeComponent();
-            List<string> Users = database.DisplayUsers();
+            Users = database.DisplayUsers();
             UserListBox.ItemsSource = Users;
         }
 
@@ -51,7 +52,6 @@ namespace MovieAppWPF
                 database.DeleteUser(selectedUser);
                 MessageBox.Show("User deleted successfully");
             }
-           
         }
 
         private void AddNewUser(object sender, RoutedEventArgs e)

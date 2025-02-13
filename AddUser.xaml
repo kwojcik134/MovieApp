@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MovieAppWPF"
         mc:Ignorable="d"
-        Title="AddNewUser" Height="400" Width="600">
+        Title="AddUser" Height="350" Width="400">
     <Grid>
-        <Button Content="AddUser" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Center" Height="30" Width="100" Click="Button_Click"/>
-        <TextBox Name="UserName" HorizontalAlignment="Center" Margin="0,0,0,70" MaxLength="20" Text="Username" VerticalAlignment="Center" Width="160" Height="40" TextChanged="TextBox_TextChanged"/>
+        <TextBox Name="UsernameBox"  HorizontalAlignment="Center" Height="40" Margin="0,100,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200" TextChanged="UsernameBox_TextChanged"/>
+        <Button Content="Add User" HorizontalAlignment="Center" Height="40" Margin="0,170,0,0" VerticalAlignment="Top" Width="100" Click="AddUser_Click"/>
 
     </Grid>
 </Window>

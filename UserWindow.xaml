@@ -8,5 +8,10 @@
         Title="UserWindow" Height="450" Width="800">
     <Grid>
         
+        <DataGrid x:Name="UserMoviesGrid" 
+                  AutoGenerateColumns="True"
+                  Margin="30 100 30 30"/>
+        <TextBox x:Name="Username" HorizontalAlignment="Left" Height="40" Margin="60,30,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200"/>
+        <Button Content="Add a review" HorizontalAlignment="Right" Height="40" Margin="0,30,60,0" VerticalAlignment="Top" Width="150" Click="AddReview"/>
     </Grid>
 </Window>

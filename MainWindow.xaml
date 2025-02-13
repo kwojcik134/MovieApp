@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
     <Grid>
-        <Button Content="User List" HorizontalAlignment="Left" Height="50" Margin="325,130,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click"/>
-        <Button Content="Movie List" HorizontalAlignment="Left" Height="50" Margin="325,220,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_1"/>
+        <Button Content="User List" HorizontalAlignment="Left" Height="50" Margin="325,130,0,0" VerticalAlignment="Top" Width="150" Click="ViewUserList"/>
+        <Button Content="Movie List" HorizontalAlignment="Left" Height="50" Margin="325,220,0,0" VerticalAlignment="Top" Width="150" Click="ViewMovieList"/>
      
 
     </Grid>

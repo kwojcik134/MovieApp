@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -17,7 +18,7 @@ namespace MovieAppWPF
         // Creates tables if they don't exist
         public void DatabaseStart() //App.xaml.cs
         {
-            using (var connection = new SqliteConnection("Data Source=database.db"))
+            using (var connection = new SqliteConnection("Data Source=Movies.db"))
             {
                 connection.Open();
                 var command = connection.CreateCommand();
@@ -25,7 +26,7 @@ namespace MovieAppWPF
                 command.CommandText = @" 
                                               CREATE TABLE If NOT EXISTS Users (
                                               Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                              Username TEXT NOT NULL UNIQUE,
+                                              Username TEXT NOT NULL UNIQUE
                                           );";
                 command.ExecuteNonQuery();
 
@@ -43,7 +44,7 @@ namespace MovieAppWPF
                                                      Id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                      UserId INTEGER NOT NULL,
                                                      MovieId INTEGER NOT NULL,
-                                                     Rating TEXT NOT NULL,
+                                                     Rating INT NOT NULL,
                                                      Review TEXT
                                                  );";
                 command.ExecuteNonQuery();
@@ -52,21 +53,23 @@ namespace MovieAppWPF
         // Adding movies
         public static void AddMovie(string title, string director, string year)
         {
-
+            string tit = title;
+            string dir = director;
+            string y = year;
             using var connection = new SqliteConnection("Data Source=Movies.db");
             connection.Open();
             var command = connection.CreateCommand();
             command.CommandText = @"
                                          INSERT INTO Movies (Title, Director, Year)
-                                         VALUES ($title), ($director), ($year);
+                                         VALUES ($title, $director, $year);
                                          ";
-            command.Parameters.AddWithValue("$title", title);
-            command.Parameters.AddWithValue("$director", director);
-            command.Parameters.AddWithValue("$year", year);
+            command.Parameters.AddWithValue("$title", tit);
+            command.Parameters.AddWithValue("$director", dir);
+            command.Parameters.AddWithValue("$year", y);
             command.ExecuteNonQuery();
         }
         //Deleting movies
-        public static void DeleteMovie(string title)
+        public static void DeleteMovie(string? title)
         {
 
             using var connection = new SqliteConnection("Data Source=Movies.db");
@@ -81,7 +84,7 @@ namespace MovieAppWPF
         }
 
         //Adding users
-        public void AddUser(string username) // AddUser.xaml.cs
+        public static void AddUser(string username) // AddUser.xaml.cs
         {
 
             using var connection = new SqliteConnection("Data Source=Movies.db");
@@ -141,7 +144,7 @@ namespace MovieAppWPF
                 //Adding review to the table
                 command.CommandText = @"
                                          INSERT INTO MovieReviews (UserId, MovieId, Rating, Review)
-                                         VALUES ($userid), ($movieid), ($rating), ($review);
+                                         VALUES ($userid, $movieid, $rating, $review);
                                          ";
                 command.Parameters.AddWithValue("$userid", uId);
                 command.Parameters.AddWithValue("$movieid", mId);
@@ -173,6 +176,27 @@ namespace MovieAppWPF
             return Users;
         }
 
+        public List<string> DisplayMovies() // UserList.xaml.cs
+        {
+            var Movies = new List<string>();
+            using (var connection = new SqliteConnection("Data Source=Movies.db"))
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = @"SELECT Title
+                                        FROM Movies;
+                                       ";
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Movies.Add(reader.GetString(0));
+                    }
+                }
+            }
+            return Movies;
+        }
+
         //Displaying all of user's reviews
         public List<Movie> UserReviews(string username)
         {
@@ -195,7 +219,7 @@ namespace MovieAppWPF
                                         SELECT Title, Director, Year, Rating, Review
                                         FROM Movies
                                         JOIN MovieReviews on Movies.Id = MovieReviews.MovieId
-                                        WHERE Movies.UserId = $uId;
+                                        WHERE MovieReviews.UserId = $uId;
                                        ";
                 command.Parameters.AddWithValue("$uId", uId);
                 using (var reader = command.ExecuteReader())
@@ -212,6 +236,37 @@ namespace MovieAppWPF
                 }
             }
             return userReviews;
+        }
+
+        public Movie MovieData(string title)
+        {
+            var tit = title;
+            string director;
+            string year;
+            using (var connection = new SqliteConnection("Data Source=Movies.db"))
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                //Getting data
+                command.CommandText = @"
+                                        SELECT Director, Year
+                                        FROM Movies
+                                        WHERE Title = $tit;
+                                      ";
+                command.Parameters.AddWithValue("$tit", tit);
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                       director = reader.GetString(0);
+                       year = reader.GetString(1);
+                       Movie movieData = new Movie(tit, director, year, "null", "null");
+                       return movieData;
+                    }
+                    
+                }                
+            }
+            return null;
         }
 
         //Displaying all of movie's reviews
@@ -236,6 +291,7 @@ namespace MovieAppWPF
                                         FROM MovieReviews
                                         WHERE MovieId = $mId;
                                        ";
+                command.Parameters.AddWithValue("$mId", mId);
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -248,9 +304,8 @@ namespace MovieAppWPF
         }
 
         //Movie average rating
-        public int? AverageRating(string title)
+        public float AverageRating(string title)
         {
-            int? rating;
             var tit = title;
             using (var connection = new SqliteConnection("Data Source=Movies.db"))
             {
@@ -271,10 +326,18 @@ namespace MovieAppWPF
                                             WHERE MovieId = $mId;
                                       ";
                 command.Parameters.AddWithValue("$mId", mId);
-                rating = (int?)command.ExecuteScalar();
+                var rate = command.ExecuteScalar();
+                if (float.TryParse(rate.ToString(), out float rating))
+                {
+                    return rating ;
+                }
+                else
+                {
+                    return 0;
+                }
             }
-            if (rating == null) { return 0; }
-            return rating;
+           
+
         }
     }
     

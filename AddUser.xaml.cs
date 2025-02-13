@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace MovieAppWPF
 {
     /// <summary>
-    /// Interaction logic for AddNewUser.xaml
+    /// Interaction logic for AddUser.xaml
     /// </summary>
     public partial class AddUser : Window
     {
@@ -24,16 +24,24 @@ namespace MovieAppWPF
             InitializeComponent();
         }
 
-        Database database = new Database();
-        private void Button_Click(object sender, RoutedEventArgs e)
+        string? username;
+        private void UsernameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var username = (string)UserName.Text;
-            database.AddUser(username);
+
         }
 
-        private void UserName_TextChanged(object sender, TextChangedEventArgs e)
+        private void AddUser_Click(object sender, RoutedEventArgs e)
         {
-
+            username = UsernameBox.Text;
+            if (username == null)
+            {
+                MessageBox.Show("Type the new user name");
+            }
+            else
+            {
+                Database.AddUser(username);
+                MessageBox.Show("User added successfully");
+            }
         }
     }
 }

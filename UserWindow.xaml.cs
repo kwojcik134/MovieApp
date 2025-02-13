@@ -19,9 +19,22 @@ namespace MovieAppWPF
     /// </summary>
     public partial class UserWindow : Window
     {
+        string userName;
+        Database database = new Database();
         public UserWindow(string username)
         {
             InitializeComponent();
+            userName = username;
+            Username.Text = userName;
+            List<Movie> userReviews = new List<Movie>();
+            userReviews = database.UserReviews(userName);
+            UserMoviesGrid.ItemsSource = userReviews;
+        }
+
+        private void AddReview(object sender, RoutedEventArgs e)
+        {
+            AddReview addReview = new AddReview(userName);
+            addReview.Show();
         }
     }
 }

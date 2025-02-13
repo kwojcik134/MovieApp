@@ -17,11 +17,24 @@ namespace MovieAppWPF
     /// <summary>
     /// Interaction logic for MovieWindow.xaml
     /// </summary>
+
     public partial class MovieWindow : Window
     {
-        public MovieWindow()
+        string movieTitle;
+        Database database = new Database();
+        List<string> reviews = new List<string>();
+        public MovieWindow(string title)
         {
             InitializeComponent();
+            movieTitle = title;
+            reviews = database.Reviews(movieTitle);
+            ReviewListBox.ItemsSource = reviews;
+            Movie movieData = database.MovieData(movieTitle);
+            MovieInfo.Text = movieData.Title + "  " + movieData.Year + "\n" + movieData.Director;
+            float rating  = database.AverageRating(movieTitle);
+            RatingAverage.Text = rating.ToString("F2");
         }
+
+        
     }
 }

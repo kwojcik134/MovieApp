@@ -21,13 +21,13 @@ namespace MovieAppWPF
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ViewUserList(object sender, RoutedEventArgs e)
         {
             UserList userlist = new UserList();
             userlist.Show();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ViewMovieList(object sender, RoutedEventArgs e)
         {
             MoviesList movieslist = new MoviesList();
             movieslist.Show();

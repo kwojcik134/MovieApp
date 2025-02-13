@@ -1,0 +1,19 @@
+﻿<Window x:Class="MovieAppWPF.AddMovie"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MovieAppWPF"
+        mc:Ignorable="d"
+        Title="AddMovie" Height="450" Width="300">
+    <Grid>
+        <TextBox x:Name="Title" HorizontalAlignment="Center" Height="40" Margin="0,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200" TextChanged="Title_TextChanged"/>
+        <TextBox x:Name="Director" HorizontalAlignment="Center" Height="40" Margin="0,160,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200" TextChanged="Director_TextChanged"/>
+        <TextBox x:Name="Year" HorizontalAlignment="Center" Height="40" Margin="0,260,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200" TextChanged="Year_TextChanged"/>
+        <Button Content="Add Movie" HorizontalAlignment="Center" Height="30" Margin="0,0,0,30" VerticalAlignment="Bottom" Width="140" Click="Button_Click"/>
+        <Label Content="Title" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="30" Margin="0,30,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label Content="Director" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="30" Margin="0,130,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label Content="Year" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="30" Margin="0,230,0,0" VerticalAlignment="Top" Width="100"/>
+
+    </Grid>
+</Window>
