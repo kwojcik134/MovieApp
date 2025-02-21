@@ -113,7 +113,7 @@ namespace MovieAppWPF
         }
 
         // Adding a review
-        public static void AddMovieReview(string username, string title, int rating, string review)
+        public void AddMovieReview(string username, string title, int rating, string review)
         {
             var un = username;
             var tit = title;
@@ -176,7 +176,7 @@ namespace MovieAppWPF
             return Users;
         }
 
-        public List<string> DisplayMovies() // UserList.xaml.cs
+        public List<string> DisplayMovies() 
         {
             var Movies = new List<string>();
             using (var connection = new SqliteConnection("Data Source=Movies.db"))
@@ -229,7 +229,7 @@ namespace MovieAppWPF
                         var title = reader.GetString(0);
                         var director = reader.GetString(1);
                         var year = reader.GetString(2);
-                        var rating = reader.GetString(3);
+                        var rating = reader.GetInt32(3);
                         var review = reader.GetString(4);
                         userReviews.Add(new Movie(title, director, year, rating, review));
                     }
@@ -238,7 +238,7 @@ namespace MovieAppWPF
             return userReviews;
         }
 
-        public Movie MovieData(string title)
+        public Movie? MovieData(string title)
         {
             var tit = title;
             string director;
@@ -260,7 +260,7 @@ namespace MovieAppWPF
                     {
                        director = reader.GetString(0);
                        year = reader.GetString(1);
-                       Movie movieData = new Movie(tit, director, year, "null", "null");
+                       Movie movieData = new Movie(tit, director, year, 0, "null");
                        return movieData;
                     }
                     

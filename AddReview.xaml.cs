@@ -17,13 +17,75 @@ namespace MovieAppWPF
     /// <summary>
     /// Interaction logic for AddReview.xaml
     /// </summary>
+    /// 
+    
     public partial class AddReview : Window
     {
-        string UserName;
+        string title;
+        int rating;
+        string userName;
+        Database database = new Database();
         public AddReview(string username)
         {
             InitializeComponent();
-            UserName = username;
+            userName = username;
+            LoadData();
+        }
+
+        public void LoadData()
+        {
+            List<string> titles = new List<string>();
+            titles = database.DisplayMovies();
+            MovieTitle.ItemsSource = titles;
+            List<int> ratings = new List<int>
+            {
+                1,
+                2,
+                3,
+                4,
+                5
+            };
+            Rating.ItemsSource = ratings;
+        }
+
+        private void MovieTitle_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Rating_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var review = Review.Text;
+
+            if (MovieTitle.SelectedItem is string movie)
+            {
+                title = movie;
+            }
+
+            if (Rating.SelectedItem is int rate)
+            {
+                rating = rate;
+            }
+
+            if (!string.IsNullOrEmpty(title) && rating != 0)
+            {
+                database.AddMovieReview(userName, title, rating, review);
+                MessageBox.Show("Review added successfully");
+            }
+            else
+            {
+                MessageBox.Show("Please select both a movie and a rating.");
+            }
         }
     }
 }

@@ -11,9 +11,9 @@ namespace MovieAppWPF
         public string Title { get; set; }
         public string Director { get; set; }
         public string Year{ get; set; }
-        public string Rating { get; set; }
+        public int Rating { get; set; }
         public string Review {  get; set; }
-        public Movie(string title, string director, string year, string rating, string review) 
+        public Movie(string title, string director, string year, int rating, string review) 
         {
             Title = title;
             Director = director;

@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MovieAppWPF"
         mc:Ignorable="d"
-        Title="AddReview" Height="450" Width="800">
+        Title="AddReview" Height="450" Width="460">
     <Grid>
-        
+        <ComboBox x:Name="MovieTitle"
+          Width="200" Height="40"
+          VerticalAlignment="Top" 
+          Margin="30,30,0,0"
+          HorizontalAlignment="Left" SelectionChanged="MovieTitle_SelectionChanged"/>
+        <ComboBox x:Name="Rating"
+            Width="60" Height="40"
+            VerticalAlignment="Top" 
+            Margin="30,100,0,0"
+            HorizontalAlignment="Left" SelectionChanged="Rating_SelectionChanged"/>
+        <TextBox x:Name="Review" HorizontalAlignment="Left" Height="160" Margin="30,170,0,0" TextWrapping="Wrap" Text="Type your review here" VerticalAlignment="Top" Width="400" TextChanged="TextBox_TextChanged"/>
+        <Button Content="Add Review" HorizontalAlignment="Left" Height="40" Margin="30,0,0,30" VerticalAlignment="Bottom" Width="150" Click="Button_Click"/>
+
     </Grid>
 </Window>
