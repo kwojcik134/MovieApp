@@ -76,6 +76,19 @@ namespace MovieAppWPF
             connection.Open();
             var command = connection.CreateCommand();
             command.CommandText = @"
+                                            SELECT Id 
+                                            FROM Movies
+                                            WHERE Title = $title;
+                                      ";
+            command.Parameters.AddWithValue("$title", title);
+            var mId = command.ExecuteScalar();
+            command.CommandText = @"
+                                    DELETE FROM MovieReviews
+                                    WHERE MovieId = $mId;
+                                    ";
+            command.Parameters.AddWithValue("mId", mId);
+            command.ExecuteNonQuery();
+            command.CommandText = @"
                                          DELETE FROM Movies
                                          WHERE Title = $title;
                                          ";
@@ -104,6 +117,19 @@ namespace MovieAppWPF
             using var connection = new SqliteConnection("Data Source=Movies.db");
             connection.Open();
             var command = connection.CreateCommand();
+            command.CommandText = @"
+                                            SELECT Id 
+                                            FROM Users
+                                            WHERE Username = $username;
+                                      ";
+            command.Parameters.AddWithValue("$username", username);
+            var uId = command.ExecuteScalar();
+            command.CommandText = @"
+                                    DELETE FROM MovieReviews
+                                    WHERE UserId = $uId;
+                                    ";
+            command.ExecuteNonQuery();
+            command.Parameters.AddWithValue("$uId", uId);
             command.CommandText = @"
                                          DELETE FROM Users
                                          WHERE Username = $username;
@@ -155,7 +181,7 @@ namespace MovieAppWPF
         }
 
         //Displaying users
-        public List<string> DisplayUsers() // UserList.xaml.cs
+        public List<string> DisplayUsers() 
         {
             var Users = new List<string>();
             using (var connection = new SqliteConnection("Data Source=Movies.db"))

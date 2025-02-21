@@ -8,8 +8,8 @@
         Title="MovieWindow" Height="450" Width="810">
     <Grid>
         <ListBox x:Name="ReviewListBox"  Margin="30,100,30,30"/>
-        <TextBox x:Name="MovieInfo" HorizontalAlignment="Left" Height="40" Margin="60,30,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150"/>
-        <TextBox x:Name="RatingAverage" HorizontalAlignment="Left" Height="40" Margin="240,30,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="40"/>
+        <TextBox x:Name="MovieInfo" HorizontalAlignment="Left" Height="40" Margin="60,30,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250"/>
+        <TextBox x:Name="RatingAverage" HorizontalAlignment="Left" Height="40" Margin="340,30,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="40"/>
        
 
     </Grid>
