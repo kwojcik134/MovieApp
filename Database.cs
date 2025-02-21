@@ -128,8 +128,8 @@ namespace MovieAppWPF
                                     DELETE FROM MovieReviews
                                     WHERE UserId = $uId;
                                     ";
-            command.ExecuteNonQuery();
             command.Parameters.AddWithValue("$uId", uId);
+            command.ExecuteNonQuery();
             command.CommandText = @"
                                          DELETE FROM Users
                                          WHERE Username = $username;
